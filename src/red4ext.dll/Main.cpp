@@ -2,6 +2,7 @@
 
 #include "App.hpp"
 #include "Hooks/CInitializationState.hpp"
+#include "Hooks/CRunningState.hpp"
 #include "Hooks/CShutdownState.hpp"
 #include "Hooks/Main.hpp"
 
@@ -42,6 +43,7 @@ BOOL APIENTRY DllMain(HMODULE aModule, DWORD aReason, LPVOID aReserved)
 
         Main::Attach();
         CInitializationState::Attach();
+        CRunningState::Attach();
         CShutdownState::Attach();
 
         break;
@@ -49,6 +51,7 @@ BOOL APIENTRY DllMain(HMODULE aModule, DWORD aReason, LPVOID aReserved)
     case DLL_PROCESS_DETACH:
     {
         CShutdownState::Detach();
+        CRunningState::Detach();
         CInitializationState::Detach();
         Main::Detach();
 

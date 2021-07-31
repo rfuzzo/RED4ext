@@ -58,6 +58,14 @@ void PluginsManager::LoadAll(const std::filesystem::path& aPluginsDir)
     m_hookingManager->AttachAll();
 }
 
+void PluginsManager::Update()
+{
+    for (const auto& [handle, plugin] : m_plugins)
+    {
+        Update(plugin);
+    }
+}
+
 void PluginsManager::UnloadAll()
 {
     for (const auto& [handle, plugin] : m_plugins)
@@ -332,6 +340,31 @@ void PluginsManager::PostLoad(const std::shared_ptr<PluginBase> aPlugin)
             auto name = aPlugin->GetName();
             spdlog::warn(L"An error occured on post load in '{}'", name);
         }
+    }
+}
+
+void PluginsManager::Update(const std::shared_ptr<PluginBase> aPlugin)
+{
+    auto update = reinterpret_cast<Update_t>(aPlugin->GetUpdateProc());
+    if (!update)
+    {
+        return;
+    }
+
+    auto name = aPlugin->GetName();
+
+    try
+    {
+        update();
+    }
+    catch (const std::exception& ex)
+    {
+        spdlog::warn(L"An exception occured while 'Update' was being called in '{}' plugin", name);
+        spdlog::warn(ex.what());
+    }
+    catch (...)
+    {
+        spdlog::warn(L"An unknown exception occured while 'Update' was being called in '{}' plugin", name);
     }
 }
 

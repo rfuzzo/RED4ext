@@ -21,6 +21,13 @@ RED4EXT_C_EXPORT void RED4EXT_CALL PostLoad()
      */
 }
 
+RED4EXT_C_EXPORT void RED4EXT_CALL Update()
+{
+    /*
+     * This is called every frame from the game's main loop.
+     */
+}
+
 RED4EXT_C_EXPORT void RED4EXT_CALL Unload()
 {
     /*

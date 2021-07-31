@@ -19,10 +19,14 @@ public:
     virtual const RED4ext::VersionInfo GetRuntime() const = 0;
     virtual const RED4ext::VersionInfo GetSdk() const = 0;
 
+    void* GetUpdateProc() const;
+
     void SetInterface(void* aInterface);
     void* GetInterface() const;
 
 private:
     RED4ext::PluginHandle m_handle;
+    void* m_updateProc;
+
     void* m_interface;
 };

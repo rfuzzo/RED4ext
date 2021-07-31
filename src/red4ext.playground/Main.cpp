@@ -5,6 +5,10 @@ RED4EXT_C_EXPORT bool RED4EXT_CALL Load(RED4ext::PluginHandle aHandle, const RED
     return true;
 }
 
+RED4EXT_C_EXPORT void RED4EXT_CALL Update()
+{
+}
+
 RED4EXT_C_EXPORT void RED4EXT_CALL Unload()
 {
 }
