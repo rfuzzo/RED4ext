@@ -26,7 +26,7 @@ void CRunningState::Attach()
 {
     new (&CRunningState_Run) REDhook<decltype(&_CRunningState_Run)>(
         {0x40, 0x53, 0x48, 0x83, 0xEC, 0x20, 0x48, 0x8B, 0x0D, 0xCC, 0xCC, 0xCC, 0xCC, 0x48, 0x8B, 0xDA},
-        &_CRunningState_Run, 4, 2);
+        &_CRunningState_Run, 5, 3);
 
     CRunningState_Run.attach();
 }
